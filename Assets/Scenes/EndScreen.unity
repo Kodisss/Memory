@@ -1116,7 +1116,7 @@ GameObject:
   - component: {fileID: 1682221953}
   - component: {fileID: 1682221954}
   m_Layer: 0
-  m_Name: Main Menu
+  m_Name: End Screen Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

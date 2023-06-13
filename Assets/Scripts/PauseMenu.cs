@@ -7,7 +7,6 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject eventSystem;
-    [SerializeField] private GameObject playButtons;
     private bool isPaused;
 
     // Start is called before the first frame update
@@ -15,7 +14,6 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         eventSystem.SetActive(true);
-        playButtons.SetActive(true);
         isPaused = false;
     }
 
@@ -34,7 +32,6 @@ public class PauseMenu : MonoBehaviour
     {
         eventSystem.SetActive(false);
         pauseMenu.SetActive(true);
-        playButtons.SetActive(false);
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -43,7 +40,6 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         eventSystem.SetActive(true);
-        playButtons.SetActive(true);
         Time.timeScale = 1f;
         isPaused = false;
     }
@@ -62,7 +58,7 @@ public class PauseMenu : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Connect4");
+        SceneManager.LoadScene("Memory");
     }
 
     private void ManageInputs()

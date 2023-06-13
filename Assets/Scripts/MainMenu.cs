@@ -13,18 +13,18 @@ public class MainMenu : MonoBehaviour
 
     public void IAGame()
     {
-        // Save the difficulty setting
+        // Save the gamemode settings
         PlayerPrefs.SetString("GameMode", "IA");
         PlayerPrefs.Save();
-        SceneManager.LoadScene("Connect4");
+        SceneManager.LoadScene("Memory");
     }
 
     public void PVPGame()
     {
-        // Save the difficulty setting
+        // Save the gamemode settings
         PlayerPrefs.SetString("GameMode", "PVP");
         PlayerPrefs.Save();
-        SceneManager.LoadScene("Connect4");
+        SceneManager.LoadScene("Memory");
     }
 
     public void SettingsScreen()
