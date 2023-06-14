@@ -92,7 +92,7 @@ public class Memory : MonoBehaviour
                 return i;
             }
         }
-        return -1;
+        return PickAValidCard(-1);
     }
 
     private int CheckForPairs()
@@ -107,7 +107,7 @@ public class Memory : MonoBehaviour
                 }
             }
         }
-        return -1;
+        return PickAValidCard(-1);
     }
 
     private IEnumerator IAPlays()
