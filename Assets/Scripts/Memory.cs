@@ -20,6 +20,8 @@ public class Memory : MonoBehaviour
     private int firstCardPlayed;
     private int secondCardPlayed;
 
+    private bool isPlaying; // tracks if the IA is playing or not
+
     private string currentPlayer;
     private int[] playerScores;
 
@@ -49,6 +51,71 @@ public class Memory : MonoBehaviour
     private void Update()
     {
         CheckForWinner();
+        IAPlay();
+    }
+
+    private void IAPlay()
+    {
+        if (PlayerPrefs.GetString("GameMode") == "IA")
+        {
+            if(currentPlayer == "Player 2" && !isPlaying)
+            {
+                
+                isPlaying = true;
+
+                DeactivateAllBoxColliders();
+
+                if(PlayerPrefs.GetInt("Difficulty") == 0)
+                {
+                    StartCoroutine(PickIACardsRandom()); // random for easy difficulty
+                }
+                else
+                {
+
+                }
+            }
+        }
+    }
+
+    private IEnumerator PickIACardsRandom()
+    {
+        yield return new WaitForSeconds(1f); // Wait for 1 second before starting to play
+
+        int playedCard = -1;
+
+        playedCard = PickAValidCard(playedCard);
+        gameBoard[playedCard].TurnCard();
+        InputReceiver(playedCard);
+
+        playedCard = PickAValidCard(playedCard);
+        gameBoard[playedCard].TurnCard();
+
+        yield return new WaitForSeconds(1f); // Wait for 1 second so the player sees what wards are turned
+
+        InputReceiver(playedCard);
+
+        yield return new WaitForSeconds(1f); // Wait for 1 second so the player cannot play while the cards are still flipped
+
+        UpdateUIDisplay();
+        ActivateAllBoxColliders();
+
+        isPlaying = false;
+    }
+
+    private int PickAValidCard(int input)
+    {
+        int randomInt = Random.Range(0, 12);
+        int antiLoop = 0;
+
+        while (gameBoard[randomInt].GetFound() || randomInt == input || antiLoop < 1000)
+        {
+            randomInt = Random.Range(0, 12);
+            antiLoop++;
+        }
+
+        Debug.Log(randomInt);
+
+        return randomInt;
     }
 
     private void CheckForWinner()
@@ -91,8 +158,13 @@ public class Memory : MonoBehaviour
             Invoke(nameof(ResetEveryNonFoundCards), 1f);
             numberOfCardsPlayed = 0;
 
-            SwapPlayer();
-            UpdateUIDisplay();
+            SwapPlayer();            
+
+            if (!isPlaying)
+            {
+                UpdateUIDisplay();
+                ActivateAllBoxColliders();
+            }
         }
     }
 
@@ -101,6 +173,14 @@ public class Memory : MonoBehaviour
         for(int i = 0; i < 12; i++)
         {
             gameBoard[i].DeactivateBoxCollider();
+        }
+    }
+
+    private void ActivateAllBoxColliders()
+    {
+        for(int i = 0; i < 12; i++)
+        {
+            if (!gameBoard[i].GetFound()) gameBoard[i].ActivateBoxCollider(); // activate all the non found card box collider so we can play
         }
     }
 
@@ -242,8 +322,6 @@ public class Memory : MonoBehaviour
             {
                 gameBoard[i].TurnCard();
             }
-
-            if (!gameBoard[i].GetFound()) gameBoard[i].ActivateBoxCollider(); // activate all the non found card box collider so we can play
         }
     }
 }

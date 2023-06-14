@@ -77,6 +77,8 @@ public class Card : MonoBehaviour
 
     public void TurnCard()
     {
+        if (found) return;
+
         if (hidden)
         {
             spriteRenderer.sprite = spriteArray[mySprite];
