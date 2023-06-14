@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Card : MonoBehaviour
@@ -13,16 +14,19 @@ public class Card : MonoBehaviour
     [SerializeField] private Sprite card4;
     [SerializeField] private Sprite card5;
 
+    // link with engine and other scripts
+    private Memory game;
+    private PauseMenu pauseMenu;
+    private BoxCollider2D boxCollider;
+
     private Sprite[] spriteArray = new Sprite[6];
 
     private SpriteRenderer spriteRenderer;
-
-    private Memory game;
-    private PauseMenu pauseMenu;
-
-    private bool hidden;
-
     private int mySprite;
+
+    // game logic gestion
+    private bool found;
+    private bool hidden;
 
     // Start is called before the first frame update
     private void Start()
@@ -30,6 +34,7 @@ public class Card : MonoBehaviour
         game = GameObject.FindGameObjectWithTag("GameController").GetComponent<Memory>();
         pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<PauseMenu>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
         InitializeSpriteArray();
         hidden = true;
     }
@@ -66,5 +71,12 @@ public class Card : MonoBehaviour
             spriteRenderer.sprite = cardBack;
             hidden = true;
         }
+    }
+
+    // tag the card as found and deactivate the box collider
+    public void Found()
+    {
+        found = true;
+        boxCollider.enabled = false;
     }
 }
