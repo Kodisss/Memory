@@ -28,6 +28,7 @@ public class Card : MonoBehaviour
     private bool found;
     private bool hidden;
     private int myIndex;
+    private bool alreadyFlipped;
 
     // Start is called before the first frame update
     private void Start()
@@ -38,6 +39,7 @@ public class Card : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         InitializeSpriteArray();
         hidden = true;
+        alreadyFlipped = false;
     }
 
     private void OnMouseDown()
@@ -82,6 +84,7 @@ public class Card : MonoBehaviour
         if (hidden)
         {
             spriteRenderer.sprite = spriteArray[mySprite];
+            alreadyFlipped = true;
             hidden = false;
         }
         else
@@ -91,9 +94,14 @@ public class Card : MonoBehaviour
         }
     }
 
-    public int GetIndex()
+    public int GetSprite()
     {
-        return myIndex;
+        return mySprite;
+    }
+
+    public bool IsAlreadyFlipped()
+    {
+        return alreadyFlipped;
     }
 
     public bool GetFound()

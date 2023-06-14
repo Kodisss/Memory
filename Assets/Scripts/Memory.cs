@@ -65,29 +65,86 @@ public class Memory : MonoBehaviour
 
                 DeactivateAllBoxColliders();
 
-                if(PlayerPrefs.GetInt("Difficulty") == 0)
-                {
-                    StartCoroutine(PickIACardsRandom()); // random for easy difficulty
-                }
-                else
-                {
-
-                }
+                StartCoroutine(IAPlays());
             }
         }
     }
 
-    private IEnumerator PickIACardsRandom()
+    private int PickTheBestCard(int firstCard)
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            if (gameBoard[i].IsAlreadyFlipped() && gameBoard[i].GetSprite() == gameBoard[firstCard].GetSprite() && i != firstCard)
+            {
+                return i;
+            }
+        }
+
+        return PickUnknownCard(firstCard);
+    }
+
+    private int PickUnknownCard(int card)
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            if (!gameBoard[i].IsAlreadyFlipped())
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int CheckForPairs()
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            for(int j = 0; j < 12; j++)
+            {
+                if (gameBoard[j].IsAlreadyFlipped() && gameBoard[j].GetSprite() == gameBoard[j].GetSprite() && j != i && !gameBoard[j].GetFound())
+                {
+                    return j;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private IEnumerator IAPlays()
     {
         yield return new WaitForSeconds(1f); // Wait for 1 second before starting to play
 
         int playedCard = -1;
 
-        playedCard = PickAValidCard(playedCard);
+        if (PlayerPrefs.GetInt("Difficulty") == 0)
+        {
+            playedCard = PickAValidCard(playedCard); // if easy random go brrrrrrr
+
+        }
+        else
+        {
+            playedCard = CheckForPairs(); // if hard or medium check for know pairs
+        }
+
         gameBoard[playedCard].TurnCard();
         InputReceiver(playedCard);
 
-        playedCard = PickAValidCard(playedCard);
+
+        if(PlayerPrefs.GetInt("Difficulty") == 0)
+        {
+            playedCard = PickAValidCard(playedCard); // if easy random go brrrrrrr
+
+        }
+        else
+        {
+            if(PlayerPrefs.GetInt("Difficulty") == 1 && Random.Range(0,2) == 0) // if medium difficulty 50/50 chance to pick random or best move
+            {
+                playedCard = PickAValidCard(playedCard);
+                Debug.Log("I went random");
+            }
+            playedCard = PickTheBestCard(playedCard); // if hard then always best move
+        }
+        
         gameBoard[playedCard].TurnCard();
 
         yield return new WaitForSeconds(1f); // Wait for 1 second so the player sees what wards are turned
@@ -113,7 +170,7 @@ public class Memory : MonoBehaviour
             antiLoop++;
         }
 
-        Debug.Log(randomInt);
+        if (debug) Debug.Log(randomInt);
 
         return randomInt;
     }
