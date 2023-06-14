@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 10459107}
   - component: {fileID: 10459106}
   - component: {fileID: 10459105}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Restart Game Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 140153737}
   - component: {fileID: 140153736}
   - component: {fileID: 140153735}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Quit Game Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,9 +401,9 @@ GameObject:
   m_Component:
   - component: {fileID: 462123554}
   - component: {fileID: 462123555}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Pause Menu
-  m_TagString: Untagged
+  m_TagString: PauseMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,7 +443,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1307463981}
   eventSystem: {fileID: 751835930}
-  playButtons: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,7 +454,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -548,7 +547,7 @@ GameObject:
   - component: {fileID: 611691635}
   - component: {fileID: 611691634}
   - component: {fileID: 611691633}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +614,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 1642676129
+  m_SortingLayerID: 903752759
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &611691636
@@ -719,7 +718,7 @@ GameObject:
   - component: {fileID: 984444487}
   - component: {fileID: 984444486}
   - component: {fileID: 984444485}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Resume Game Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +851,7 @@ GameObject:
   - component: {fileID: 1241258290}
   - component: {fileID: 1241258292}
   - component: {fileID: 1241258291}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -987,7 +986,7 @@ GameObject:
   - component: {fileID: 1307463982}
   - component: {fileID: 1307463984}
   - component: {fileID: 1307463983}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Pause Menu Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1070,7 +1069,7 @@ GameObject:
   - component: {fileID: 1336652546}
   - component: {fileID: 1336652545}
   - component: {fileID: 1336652544}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1203,7 +1202,7 @@ GameObject:
   - component: {fileID: 1533050520}
   - component: {fileID: 1533050522}
   - component: {fileID: 1533050521}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1338,7 +1337,7 @@ GameObject:
   - component: {fileID: 1652354520}
   - component: {fileID: 1652354522}
   - component: {fileID: 1652354521}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pause Menu Event System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1406,7 +1405,7 @@ GameObject:
   - component: {fileID: 1658927944}
   - component: {fileID: 1658927946}
   - component: {fileID: 1658927945}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Pause Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1539,9 +1538,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1664662650}
+  - component: {fileID: 1664662651}
   m_Layer: 0
   m_Name: Memory Game
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1561,6 +1561,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1664662651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664662649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c09898246ddc0949babd805aeb150a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 5813924734519197442, guid: 037f0de6d89b57447a352e08d06a1ba2, type: 3}
+  debug: 0
 --- !u!1 &1723273131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,7 +1586,7 @@ GameObject:
   - component: {fileID: 1723273132}
   - component: {fileID: 1723273134}
   - component: {fileID: 1723273133}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1707,7 +1721,7 @@ GameObject:
   - component: {fileID: 1727970704}
   - component: {fileID: 1727970706}
   - component: {fileID: 1727970705}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
