@@ -25,6 +25,6 @@ public class EndScreen : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene("Connect4");
+        SceneManager.LoadScene("Memory");
     }
 }

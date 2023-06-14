@@ -27,6 +27,7 @@ public class Card : MonoBehaviour
     // game logic gestion
     private bool found;
     private bool hidden;
+    private int myIndex;
 
     // Start is called before the first frame update
     private void Start()
@@ -41,7 +42,21 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!pauseMenu.GetPaused()) TurnCard();
+        if (!pauseMenu.GetPaused())
+        {
+            TurnCard();
+            game.InputReceiver(myIndex);
+        }
+    }
+
+    public void DeactivateBoxCollider()
+    {
+        boxCollider.enabled = false;
+    }
+
+    public void ActivateBoxCollider()
+    {
+        boxCollider.enabled = true;
     }
 
     private void InitializeSpriteArray()
@@ -54,12 +69,13 @@ public class Card : MonoBehaviour
         spriteArray[5] = card5;
     }
 
-    public void SetMySprite(int input)
+    public void SetMySprite(int spriteNumber, int positionInArray)
     {
-        mySprite = input;
+        mySprite = spriteNumber;
+        myIndex = positionInArray;
     }
 
-    private void TurnCard()
+    public void TurnCard()
     {
         if (hidden)
         {
@@ -73,8 +89,23 @@ public class Card : MonoBehaviour
         }
     }
 
+    public int GetIndex()
+    {
+        return myIndex;
+    }
+
+    public bool GetFound()
+    {
+        return found;
+    }
+
+    public bool GetHidden()
+    {
+        return hidden;
+    }
+
     // tag the card as found and deactivate the box collider
-    public void Found()
+    public void IWasFound()
     {
         found = true;
         boxCollider.enabled = false;
